@@ -32,7 +32,11 @@ export default {
         "sub-text-product-info": "#4B5563",
         /*product information*/
 
-      }
+      },
+
+      boxShadow: {
+        "header": "0px 3px 0.2px rgba(104, 104, 104, 0.25)",
+      },
     },
   },
   plugins: []

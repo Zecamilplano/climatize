@@ -1,7 +1,20 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    // Considere atualizar para versões mais recentes
+    "target": "ES2020", // ou "ES2022"
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Adicione bibliotecas de tipos
+    "module": "ESNext",
+    
+    // Para projetos React mais modernos
+    "jsx": "react-jsx", // Se estiver usando React 17+
+    
+    // Adicione configurações para melhor suporte a importações
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    
+    // Configurações adicionais de segurança
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+
+  }
 }

@@ -19,7 +19,7 @@ export default {
         /*home*/
 
         /*product*/
-        "not-select": "#78717B",
+        "gray": "#78717B",
         "menu-product": "#F4F4F5",
         "card-product": "#3EBED1",
         "button": "#37C7EF",
@@ -36,6 +36,15 @@ export default {
 
       boxShadow: {
         "header": "0px 3px 0.2px rgba(104, 104, 104, 0.25)",
+      },
+
+      fontFamily: {
+        "sans": ["Montserrat", "sans-serif"],
+      },
+
+      screens: {
+        "tb-1180": "1180px",
+        "desktop-2560": "2560px"
       },
     },
   },

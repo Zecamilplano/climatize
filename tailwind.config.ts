@@ -41,7 +41,8 @@ export default {
       },
 
       fontFamily: {
-        "sans": ["Montserrat", "sans-serif"],
+        "montserrat": ["var(--font-montserrat)"],
+        "inter": ["var(--font-inter)"]
       },
 
       screens: {

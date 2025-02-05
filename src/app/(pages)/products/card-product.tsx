@@ -1,5 +1,5 @@
 "use client"
-import { useProduct } from "@/app/hooks/hook"
+import { useProduct } from "@/app/hooks/hook-products"
 import Image from "next/image"
 
 export function CardProduct() {

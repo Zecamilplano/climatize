@@ -23,6 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="pt-br">
       <body
@@ -30,7 +31,7 @@ export default function RootLayout({
       >
         <Header />
         <main className="bg-main flex-grow">{children}</main>
-      </body>
-    </html>
+      </body >
+    </html >
   );
 }

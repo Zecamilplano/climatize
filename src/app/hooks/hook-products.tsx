@@ -1,10 +1,9 @@
 "use client"
 import { useState } from "react";
 import { TypeProduct } from "../types/types";
-import { listProducts } from "../data/product";
 
-export function useProduct() {
-  const [products, setProducts] = useState<TypeProduct[]>(listProducts)
+export function useProduct(initialProucts: TypeProduct[]) {
+  const [products, setProducts] = useState<TypeProduct[]>(initialProucts)
 
   return { products, setProducts }
 }

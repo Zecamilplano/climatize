@@ -7,8 +7,8 @@ export function Header() {
   const { links, pathname, scrollToSection, activeSection } = useHeader()
 
   return (
-    <header key={1} className="w-screen md:w-auto h-auto flex flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center fixed top-0 left-0 right-0 z-50 bg-white">
-      <Image src="/logo.png" alt="Logo" width={300} height={300} />
+    <header key={1} className="w-screen h-[101px] md:w-auto flex flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center fixed top-0 left-0 right-0 z-50 bg-white">
+      <Image src="/logo.png" alt="Logo" width={200} height={200} />
       <div className="flex flex-col items-center md:items-end  md:self-center  pt-2 text-link-normal">
         {/* <a href="https://wa.me/5577999827672?text=Ol%C3%A1%2C%20climatize!" target="_blank" className="text-2xl hover:opacity-70 active:opacity-60">FONE: (77) 999827672</a> */}
         <a href="https://wa.me/5577999827672?text=Ol%C3%A1%2C%20climatize!" target="_blank" className="text-2xl hover:opacity-70 active:opacity-60">FONE: (xx) xxxxxxxxx</a>

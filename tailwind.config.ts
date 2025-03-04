@@ -17,12 +17,12 @@ export default {
         /*home*/
         "title-card-main": "#7394DE",
         "card-main": "#7491D8",
-        main: "#E6F3F7",
+        "main": "#E6F3F7",
         /*home*/
 
         /*product*/
         "gray": "#78717B",
-        "menu-product": "#F4F4F5",
+        "menu-unselected": "#F4F4F5",
         "card-product": "#3EBED1",
         "button": "#37C7EF",
         /*product*/
@@ -46,8 +46,11 @@ export default {
       },
 
       screens: {
+        "tb-810": "810px",
         "tb-1180": "1180px",
-        "desktop-2560": "2560px"
+        "desktop-1366": "1366px",
+        "desktop-1559": "1559px",
+        "desktop-2560": "2560px",
       },
     },
   },

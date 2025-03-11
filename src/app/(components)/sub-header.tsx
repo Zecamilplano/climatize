@@ -2,7 +2,7 @@ import { House } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export function HeaderReview() {
+export function SubHeader() {
   return (
     <header className="flex flex-col md:flex-row justify-between items-center md:mx-2 py-2 shadow-header">
       <Image src="/logo.png" width={200} height={200} alt="Logo" />

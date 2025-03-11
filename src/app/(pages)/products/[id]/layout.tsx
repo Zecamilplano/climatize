@@ -1,4 +1,4 @@
-import { HeaderReview } from "@/app/(components)/header-review";
+import { SubHeader } from "@/app/(components)/sub-header";
 import { Montserrat, Inter } from "next/font/google"
 import React from "react";
 
@@ -16,7 +16,7 @@ export default function LayoutReview({ children }: { children: React.ReactNode }
   return (
     <html lang="pt-br">
       <body className={`${montserrat} ${inter} antialiased`}>
-        <HeaderReview />
+        <SubHeader />
         <main className="bg-main  ">{children}</main>
       </body >
     </html >

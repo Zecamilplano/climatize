@@ -18,8 +18,8 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <section className=" bg-main border-[20px] border-main flex flex-col items-center ">
-      <div className="bg-white flex flex-col md:w-4/5 md:flex-row desktop-1366:flex-row desktop-1366:h-auto desktop-1366:w-4/5 desktop-1559:flex-row items-center text-left">
+    <section className=" bg-main border-[20px] border-main flex flex-col items-center  rounded-md">
+      <div className="bg-white flex flex-col md:w-4/5 md:flex-row desktop-1366:flex-row desktop-1366:h-auto desktop-1366:w-4/5 desktop-1559:flex-row items-center text-left rounded-md">
 
         <div className="w-full md:w-1/2 flex justify-center self-center p-4 ">
           <div className="relative w-full h-64 md:h-80 lg:h-96">
@@ -51,7 +51,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
       <div className="bg-white md:w-4/5 ">
         <div className="flex justify-center flex-wrap items-center desktop-1366:justify-evenly desktop-1559:justify-evenly w-4/5 mx-auto gap-5 font-montserrat bg-white">
-          <div className=" text-left desktop-1366:w-[40%]">
+          <div className=" text-left desktop-1366:w-[40%] rounded-md">
             <h3 className="text-2xl md:text-3xl font-semibold">Características Principais</h3>
             <ul className="ml-4">
               {product.technicalFeatures.map(technicalFeature => (
@@ -62,7 +62,7 @@ export default function ProductPage({ params }: ProductPageProps) {
               ))}
             </ul>
           </div>
-          <div className=" desktop-1366:w-[40%] desktop-1559:w-auto">
+          <div className=" desktop-1366:w-[40%] desktop-1559:w-auto rounded-md">
             <h3 className="text-2xl md:text-3xl font-semibold">Benefícios</h3>
             <ul className="ml-4">
               {product.benefits.map(benefit => (

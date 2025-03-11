@@ -21,8 +21,9 @@ export default {
         /*home*/
 
         /*product*/
-        "gray": "#78717B",
-        "menu-unselected": "#F4F4F5",
+        "menu": "#87CEEB",
+        "menu-unselected": "#3498db",
+        "menu-selected": "#3498db",
         "card-product": "#3EBED1",
         "button": "#37C7EF",
         /*product*/

@@ -7,7 +7,7 @@ export function Header() {
   const { links, pathname, scrollToSection, activeSection } = useHeader()
 
   return (
-    <header key={1} className="w-screen h-[101px] md:w-auto flex flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center fixed top-0 left-0 right-0 z-50 bg-white">
+    <header key={1} className="w-screen  md:h-[101px] md:w-auto flex md:flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center md:fixed top-0 left-0 right-0 z-50 bg-white">
       <Image src="/logo.png" alt="Logo" width={200} height={200} />
       <div className="flex flex-col items-center md:items-end  md:self-center  pt-2 text-link-normal">
         {/* <a href="https://wa.me/5577999827672?text=Ol%C3%A1%2C%20climatize!" target="_blank" className="text-2xl hover:opacity-70 active:opacity-60">FONE: (77) 999827672</a> */}
@@ -24,9 +24,9 @@ export function Header() {
                     }}
                     className={`
                       ${activeSection === link.href
-                        ? 'text-red-600 border-blue-600'
-                        : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300'
-                      } transition-all border-b-2 pb-1
+                        ? "text-link-clicked "
+                        : "text-link-normal"
+                      } transition-all pb-1 outline-none
                     `}
                   >
                     {link.name}
@@ -37,9 +37,9 @@ export function Header() {
                     href={link.href}
                     className={`
                       ${pathname === link.href
-                        ? 'text-red-600 border-blue-600'
-                        : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300'
-                      } transition-all border-b-2 pb-1
+                        ? "text-link-clicked"
+                        : "text-link-normal"
+                      } transition-all pb-1 outline-none
                     `}
                   >
                     {link.name}

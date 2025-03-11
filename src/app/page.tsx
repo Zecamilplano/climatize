@@ -5,9 +5,9 @@ import RenderProducts from "./(pages)/products/page";
 
 export default function Home() {
   return (
-    <MenuProvider>
+    <>
       <HomeComponent />
       <RenderProducts />
-    </MenuProvider>
+    </>
   );
 }

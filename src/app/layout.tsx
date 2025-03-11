@@ -2,6 +2,7 @@ import { Montserrat, Inter } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "./(components)/header";
+import { MenuProvider } from "./contexts/menu-context";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600"],
@@ -29,8 +30,10 @@ export default function RootLayout({
       <body
         className={`${montserrat} ${inter} antialiased`}
       >
-        <Header />
-        <main className="bg-main flex-grow">{children}</main>
+        <MenuProvider>
+          <Header />
+          <main className="bg-main flex-grow">{children}</main>
+        </MenuProvider>
       </body >
     </html >
   );

@@ -7,7 +7,9 @@ export function Header() {
   const { links, pathname, scrollToSection, activeSection } = useHeader()
 
   return (
-    <header key={1} className="w-screen  md:h-[101px] md:w-auto flex md:flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center md:fixed top-0 left-0 right-0 z-50 bg-white">
+    <header key={1} className={`w-screen  md:h-[101px] md:w-auto flex md:flex-col justify-center flex-wrap md:justify-between md:pl-8 md:pr-8 md:pt-1 lg:justify-between shadow-header font-sans lg:flex-row content-center  top-0 left-0 right-0 z-50 bg-white
+        ${pathname === "/" ? "md:fixed" : "relative"}  
+`}>
       <Image src="/logo.png" alt="Logo" width={200} height={200} />
       <div className="flex flex-col items-center md:items-end  md:self-center  pt-2 text-link-normal">
         {/* <a href="https://wa.me/5577999827672?text=Ol%C3%A1%2C%20climatize!" target="_blank" className="text-2xl hover:opacity-70 active:opacity-60">FONE: (77) 999827672</a> */}
@@ -20,7 +22,12 @@ export function Header() {
                 {link.href.startsWith("#") ? (
                   <button
                     onClick={() => {
-                      scrollToSection(link.href);
+                      if (pathname === "/") {
+                        scrollToSection(link.href);
+
+                      } else {
+                        window.location.href = `/${link.href}`
+                      }
                     }}
                     className={`
                       ${activeSection === link.href
@@ -34,7 +41,7 @@ export function Header() {
                 ) : (
                   // Link normal para outras páginas
                   <Link
-                    href={link.href}
+                    href={pathname === "/about" ? "/about" : link.href}
                     className={`
                       ${pathname === link.href
                         ? "text-link-clicked"

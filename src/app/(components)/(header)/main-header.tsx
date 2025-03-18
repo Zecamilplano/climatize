@@ -1,9 +1,9 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import { useHeader } from "../hooks/hook-header-scroll"
+import { useHeader } from "../../hooks/hook-header-scroll"
 
-export function Header() {
+export function MainHeader() {
   const { links, pathname, scrollToSection, activeSection } = useHeader()
 
   return (
@@ -41,7 +41,7 @@ export function Header() {
                 ) : (
                   // Link normal para outras páginas
                   <Link
-                    href={pathname === "/about" ? "/about" : link.href}
+                    href={pathname === "/sobre" ? "/sobre" : link.href}
                     className={`
                       ${pathname === link.href
                         ? "text-link-clicked"

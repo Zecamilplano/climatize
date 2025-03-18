@@ -20,6 +20,14 @@ export default {
         "main": "#E6F3F7",
         /*home*/
 
+        /*about*/
+        "hero-section": "#7491D8",
+        "title": "#3FBFD3",
+        "timeline": "#E6F3F7",
+        "about": "#4B5563",
+        "footer": "#7394DE",
+        /*about*/
+
         /*product*/
         "menu": "#87CEEB",
         "menu-unselected": "#3498db",

@@ -8,9 +8,9 @@ export function useHeader() {
   const pathname = usePathname();
 
   const links = [
-    { name: "Início", href: "#home" },
-    { name: "Produtos", href: "#products" },
-    { name: "Contato", href: "#contato" },
+    { name: "Início", href: "#inicio" },
+    { name: "Produtos", href: "#produtos" },
+    { name: "Sobre", href: "/sobre" },
   ];
 
 

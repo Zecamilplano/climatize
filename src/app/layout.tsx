@@ -1,7 +1,7 @@
 import { Montserrat, Inter } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "./(components)/header";
+import { Header } from "./(components)/(header)/header";
 import { MenuProvider } from "./contexts/menu-context";
 
 const montserrat = Montserrat({

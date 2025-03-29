@@ -1,0 +1,26 @@
+.grid-form {
+  display: grid;
+  grid-template-areas: "img info benefits ";
+  grid-template-rows: "auto auto"; 
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 1024px) {
+  .grid-form {
+    grid-template-areas:
+      "img img"
+      "info benefits";
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-form {
+    grid-template-areas:
+      "img"
+      "info"
+      "benefits";
+    grid-template-columns: 1fr;
+  }
+}
+

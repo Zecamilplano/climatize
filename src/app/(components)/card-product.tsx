@@ -4,8 +4,6 @@ import Link from "next/link";
 import React from "react"
 
 type TypeProduct = {
-  CustomComponent?: React.ComponentType
-  key?: number
   nameProduct: string
   srcProduct: string | number
   width?: number
@@ -15,8 +13,6 @@ type TypeProduct = {
 
 
 export function CardProduct({
-  CustomComponent,
-  key,
   nameProduct,
   srcProduct,
   width,
@@ -30,7 +26,6 @@ export function CardProduct({
           <AnimatePresence >
 
             <motion.article
-              key={key}
               initial={{ opacity: 0, x: -10, y: 0 }}
               animate={{ opacity: 10, x: 0, y: 0 }}
               exit={{ opacity: 1, x: 10, y: 0, transitionEnd: { display: "none" } }}

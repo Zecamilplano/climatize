@@ -24,8 +24,12 @@ export default {
         "hero-section": "#7491D8",
         "title": "#3FBFD3",
         "timeline": "#E6F3F7",
+        "timeline-card": "#37C7EF",
         "about": "#4B5563",
-        "footer": "#7394DE",
+        "value-card": "#7394DE",
+        "contact": "#3EBED1",
+        "button-contact": "#37C7EF",
+        "button-hover-contact": "#0775A7",
         /*about*/
 
         /*product*/
@@ -43,6 +47,17 @@ export default {
         "sub-text-product-info": "#4B5563",
         /*product information*/
 
+        /*login*/
+        "input-border": "#E2E8F0",
+        /*login*/
+
+        /*add product*/
+        "drag-drop-bg": "#F9FAFB",
+        "drag-drop-border": "#D1D5DB",
+        "drag-drop-text": "#4F5967",
+        /*add product*/
+
+        "footer": "#7394DE"
       },
 
       boxShadow: {
@@ -50,8 +65,8 @@ export default {
       },
 
       fontFamily: {
-        "montserrat": ["var(--font-montserrat)"],
-        "inter": ["var(--font-inter)"]
+        "montserrat": ["Montserrat", "sans-serif"],
+        "inter": ["Inter", "sans-serif"]
       },
 
       screens: {

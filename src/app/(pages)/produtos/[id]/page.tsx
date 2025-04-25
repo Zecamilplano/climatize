@@ -39,7 +39,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="pt-3">
             <h2 className="text-2xl md:text-[26px] font-medium text-subtitle-product-info mx-1.5">Características principais</h2>
             <ul className="list-disc pl-8 mx-5 m-bottom-5 text-left">
-              {product.mainFeatures.map((mainFeature, index) => (
+              {product.mainFeatures?.map((mainFeature, index) => (
                 <li className="text-lg text-sub-text-product-info" key={index}>{mainFeature}</li>))}
             </ul>
 
@@ -54,7 +54,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className=" text-left desktop-1366:w-[40%] rounded-md">
             <h3 className="text-2xl md:text-3xl font-semibold">Características Principais</h3>
             <ul className="ml-4">
-              {product.technicalFeatures.map(technicalFeature => (
+              {product.technicalFeatures?.map(technicalFeature => (
                 <li className="flex items-start">
                   <span className="text-xl mr-2">•</span>
                   <span>{technicalFeature}</span>
@@ -65,7 +65,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className=" desktop-1366:w-[40%] desktop-1559:w-auto rounded-md">
             <h3 className="text-2xl md:text-3xl font-semibold">Benefícios</h3>
             <ul className="ml-4">
-              {product.benefits.map(benefit => (
+              {product.benefits?.map(benefit => (
                 <li className="flex items-start">
                   <span className="text-xl mr-2">•</span>
                   <span>{benefit}</span>
@@ -76,7 +76,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="">
             <h3 className="text-2xl md:text-3xl font-semibold desktop-1366:w-[50%]">Especificações Técnicas</h3>
             <ul className="ml-4">
-              {Object.entries(product.technicalSpecifications).map(([key, value]) => (
+              {Object.entries(product.technicalSpecifications ?? {}).map(([key, value]) => (
                 <li className="flex items-start">
                   <span className="text-xl mr-2">•</span>
                   <span>{key}: {value}</span>

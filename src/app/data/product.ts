@@ -24,7 +24,7 @@ export const listProducts: TypeProduct[] = [
       "Fácil de transportar e instalar",
     ],
     technicalSpecifications: {
-      Potência: "75W",
+      Potencia: "75W",
       Voltagem: "220V",
       Peso: "6.5kg",
       Dimensões: "30x25x60cm",

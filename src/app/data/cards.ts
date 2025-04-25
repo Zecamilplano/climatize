@@ -1,4 +1,6 @@
-export const listCard = {
+import { TypeListCard } from "../types/types";
+
+export const listCard: TypeListCard = {
   featuresMain: {
     titleInformation: "Características Principais",
     listInformation: [],

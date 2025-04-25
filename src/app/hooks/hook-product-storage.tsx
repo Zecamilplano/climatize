@@ -1,29 +1,78 @@
-import { useState, useEffect } from "react";
-import { imagesType, saveProductType } from "../types/types";
+import { useEffect, useState } from "react";
+import { DataToSendType } from "../types/types";
 
-export default function useProductStorage() {
-  const LOCAL_STORAGE_KEY = "produto"
+type Produto = {
+  nome: string;
+  descricao: string;
+};
 
-  const [product, setProduct] = useState<saveProductType>(() => {
-    if (typeof window !== "undefined") {
-      const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return storedData ? JSON.parse(storedData) : { nome: "", descricao: "" };
-    }
-    return { nome: "", descricao: "" }
-  })
+const LOCAL_STORAGE_KEY = "formularioProduto";
 
+export function useProductForm() {
+  const [product, setProduct] = useState<Produto>({
+    nome: "",
+    descricao: "",
+  });
+
+  // Carregar do localStorage ao iniciar
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(product))
-  }, [product])
+    const savedProduct = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedProduct) {
+      setProduct(JSON.parse(savedProduct));
+    }
+  }, []);
 
-  function updateProduct(field: string, value: string) {
-    setProduct(prev => ({ ...prev, [field]: value }))
+  // Atualizar localStorage sempre que o estado mudar
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(product));
+  }, [product]);
+
+  // Atualizar campos
+  function updateProduct(campo: keyof Produto, valor: string) {
+    setProduct((prev) => ({ ...prev, [campo]: valor }));
   }
 
-  function cleanProduct() {
+  // Limpar tudo (ex: após envio)
+  function resetProduct() {
+    const vazio = { nome: "", descricao: "" };
+    setProduct(vazio);
     localStorage.removeItem(LOCAL_STORAGE_KEY);
-    setProduct({ nome: "", descricao: "" });
   }
 
-  return { product, updateProduct, cleanProduct }
+  const saveProduct = async (data: DataToSendType): Promise<void> => {
+    const formData = new FormData();
+
+    if (data.images && data.images.length > 0) {
+      formData.append('file', data.images[0]); // Apenas o primeiro arquivo
+    }
+
+    formData.append('nome', data.name);
+
+    formData.append('descricao', data.description ?? "");
+    formData.append('caracteristicas', JSON.stringify(data.features));
+    formData.append('beneficios', JSON.stringify(data.benefits));
+    formData.append('especificacoes', JSON.stringify(data.specifications));
+    console.log(data)
+
+    try {
+      const response = await fetch("http://192.168.14.9:3000/produtos", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.text();
+
+      if (!response.ok) {
+        console.error("Erro no envio:", result);
+        return;
+      }
+
+      console.log("Produto enviado com sucesso:", result);
+      // const result = await response.json();
+      console.log("Product sent successfully:", response);
+    } catch (error) {
+      console.error("Error sending product:", error);
+    }
+  };
+  return { product, saveProduct, updateProduct, resetProduct };
 }
+

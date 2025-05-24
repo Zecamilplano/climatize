@@ -4,8 +4,8 @@ import Link from "next/link";
 import React from "react"
 
 type TypeProduct = {
-  nameProduct: string
-  srcProduct: string | number
+  nome: string
+  urlImage: string | number
   width?: number
   height?: number
   href: string
@@ -13,8 +13,8 @@ type TypeProduct = {
 
 
 export function CardProduct({
-  nameProduct,
-  srcProduct,
+  nome,
+  urlImage,
   width,
   height,
   href }: TypeProduct) {
@@ -36,14 +36,14 @@ export function CardProduct({
               }}
               className="bg-white w-80 flex flex-col flex-wrap text-center justify-center  rounded-md"
             >
-              <Image
-                src={`${srcProduct}`}
-                alt={`produto ${nameProduct}`}
-                width={width ?? 176}
-                height={height ?? 176}
-                priority={true}
+              <img
+                src={`${urlImage}`}
+                alt={`produto ${nome}`}
+                width={176}
+                height={176}
                 className="w-44 flex self-center" />
-              <h2 className="text-xl font-medium text-card-product">{nameProduct}</h2>
+
+              <h2 className="text-xl font-medium text-card-product">{nome}</h2>
               <Link
                 href={`${href}`}
                 className="bg-button mx-3 rounded text-white text-xl py-2 hover:opacity-70 active:opacity-50 mb-3 outline-none">Comprar</Link>

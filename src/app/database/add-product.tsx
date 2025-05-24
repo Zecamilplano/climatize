@@ -1,7 +1,7 @@
 import { TypeProduct } from "../types/types"
+import API from "./api"
 
 export default async function AddProductDatabese(product: TypeProduct) {
-  const api = "http://localhost:3000/produtos"
 
   const formData = new FormData()
   formData.append('nome', product.nameProduct || "")
@@ -22,7 +22,7 @@ export default async function AddProductDatabese(product: TypeProduct) {
   }
 
   try {
-    const response = await fetch(api, {
+    const response = await fetch(`${API}/produtos`, {
       method: "POST",
       body: formData
     })

@@ -1,8 +1,9 @@
-import { Montserrat, Inter } from "next/font/google"
+import { Montserrat, Inter, Noto_Sans_TC } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "./(components)/(header)/header";
 import { MenuProvider } from "./contexts/menu-context";
+import { ToastContainer } from 'react-toastify';
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600"],
@@ -33,6 +34,7 @@ export default function RootLayout({
         <MenuProvider>
           <Header />
           <main className="bg-main flex-grow">{children}</main>
+          <ToastContainer />
         </MenuProvider>
       </body >
     </html >

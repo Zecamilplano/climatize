@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DataToSendType } from "../types/types";
+import API from "../database/api";
 
 type Produto = {
   nome: string;
@@ -55,7 +56,7 @@ export function useProductForm() {
     console.log(data)
 
     try {
-      const response = await fetch("http://192.168.14.9:3000/produtos", {
+      const response = await fetch(`${API}/produtos`, {
         method: "POST",
         body: formData,
       });

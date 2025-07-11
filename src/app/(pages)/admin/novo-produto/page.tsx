@@ -5,9 +5,7 @@ import NewProduct from "./new-product"
 
 export default function PageNovoProduto() {
   return (
-    <CardInfoProvider>
-      <NewProduct />
-    </CardInfoProvider>
+    <NewProduct />
   )
 }
 

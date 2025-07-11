@@ -3,6 +3,13 @@
 import { useRef, useState } from "react"
 import { imagesType } from "../types/types"
 
+type FileData = {
+  name: string
+  size: number
+  sizeMB: string
+  preview: string
+  file: File
+}
 export function UseDragEvents() {
 
   const [images, setImages] = useState<imagesType>([])
@@ -53,20 +60,25 @@ export function UseDragEvents() {
   }
 
 
-  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFileChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    errorImgCallback: (msg: string) => void,
+  ) {
     event.preventDefault()
     if (!event.target.files) return
 
     const files = Array.from(event.target.files)
     const image = files.map(file => ({
       name: file.name,
-      size: file.size,
-      sizeMB: formatFileSize(file.size),
       preview: URL.createObjectURL(file),
       file: file
     }))
-    setImages(image)
 
+    if (files.length > 0) {
+      errorImgCallback("")
+    }
+
+    setImages(image)
   }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);

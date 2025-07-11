@@ -1,0 +1,13 @@
+.hiden-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge */
+}
+
+.hiden-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
+}
+
+input[type="radio"] {
+  appearance: none;
+}
+

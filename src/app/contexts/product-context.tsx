@@ -16,10 +16,10 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
   const formData = new FormData()
 
   formData.append("nome", product?.nameProduct || "")
-  formData.append('descricao', product.description || "")
-  formData.append('caracteristicas', `${product.mainFeatures}`)
-  formData.append('beneficios', `${product.benefits}`)
-  formData.append('especificacoes', `${product.technicalSpecifications}`)
+  formData.append('descricao', product?.description || "")
+  formData.append('caracteristicas', `${product?.mainFeatures}`)
+  formData.append('beneficios', `${product?.benefits}`)
+  formData.append('especificacoes', `${product?.technicalSpecifications}`)
 
   const updateProduct = async () => {
     const res = await fetch(`${API}/produto`, {

@@ -12,7 +12,7 @@ export function RenderCardProduct() {
   const { products } = useProduct(listProducts)
   const { activeCategory } = useMenu()
   const { getProducts } = useGetProducts()
-  console.log("teste ", getProducts.map(data => data.nome))
+  console.log("teste ", getProducts.map(data => data))
 
   const filteredProducts = products.filter(product => product.sectionArea === activeCategory)
 
@@ -23,7 +23,7 @@ export function RenderCardProduct() {
   return (
     <>
       <MenuCategory />
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="flex flex-wrap justify-center gap-8 bg-main">
         {getProducts.map(product => (
           <CardProduct
             key={product.id}

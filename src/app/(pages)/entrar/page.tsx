@@ -1,29 +1,37 @@
 "use client"
+
+import authenticate from "@/app/database/authenticate";
 import { Eye, EyeOff } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import bcrypt from "bcryptjs";
+import { redirect } from "next/navigation";
+import { useRef, useState, useEffect } from "react";
+
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const [user, setUser] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+
   const inputRef = useRef(null)
 
-  useEffect(() => {
-    async function generateHash() {
-      try {
-        const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync("B4c0/\/", salt)
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
 
-        const cleanHash = hash.replace(/[^a-zA-Z0-9]/g, "")
-        console.log("hash gerado " + cleanHash)
-      } catch (error) {
-        console.log("Erro ao gerar o hash " + error)
-      }
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user, password }),
+    })
+
+    if (res.ok) {
+      redirect("/admin/painel-admin")
+    } else {
+      console.log("Usuário ou senha inválidos")
     }
+  }
 
-
-    generateHash()
-  }, [])
 
   return (
     <section className="bg-main min-h-screen flex flex-col justify-center items-center p-4 md:p-0">
@@ -31,21 +39,22 @@ export default function Login() {
         <h2 className="text-title text-2xl text-center">Acesso ao sistema</h2>
 
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={e => handleSubmit(e)}
           className="flex flex-col gap-4 mt-4 md:mt-6">
           <div className="flex flex-col">
-            <label htmlFor="email" className="font-medium">Email</label>
+            <label htmlFor="username" className="font-medium">Nome</label>
             <input
-              type="email"
-              name="email"
-              placeholder="nome@empresa.com"
-              className="border border-gray-300 px-3 py-2 rounded-md focus:outline-cyan-400"
+              type="text"
+              onChange={(e) => setUser(e.target.value)}
+              name="username"
+              placeholder="Digite seu usuário"
+              className="border border-gray-300 px-3 py-2 rounded-md focus:border-none focus:outline-none focus:outline-cyan-400"
             />
           </div>
 
           <div className="flex flex-col">
             <label htmlFor="password" className="font-medium">Senha</label>
-            <div className={`flex flex-row items-center border-2 border-gray-300 ${isFocused ? "border-cyan-400" : "border-gray-300"}`}>
+            <div className={`flex flex-row items-center border-2 rounded-md ${isFocused ? "border-cyan-400 " : "border-gray-300"}`}>
               <input
                 type={showPassword ? "text" : "password"}
                 ref={inputRef}
@@ -53,7 +62,8 @@ export default function Login() {
                 placeholder="Digite sua senha"
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full px-2 py-3 rounded-md outline-none  " />
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-2 py-3 border-none outline-none active:outline-none active:border-none" />
 
               <button
                 onClick={() => setShowPassword(prev => !prev)}
@@ -71,8 +81,8 @@ export default function Login() {
 
           <button
             type="submit"
-            onSubmit={(e) => e.preventDefault()}
-            className="bg-button h-12 w-full text-white font-medium rounded-md hover:opacity-80 focus:opacity-50 transition-all"
+            // onSubmit={(e) => e.preventDefault()}
+            className="bg-button h-12 w-full text-white font-medium rounded-md hover:opacity-80 active:opacity-80"
           >
             Entrar
           </button>

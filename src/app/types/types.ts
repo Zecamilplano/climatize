@@ -1,14 +1,14 @@
 "use client"
 
-import { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image"
 
 const textButtonValue = "Comprar"
 
 export type TypeProduct = {
-  id?: number;
-  nameProduct?: string;
-  srcProduct?: StaticImageData | File | string | imagesType;
-  textButton?: typeof textButtonValue;
+  id?: number
+  nameProduct?: string
+  srcProduct?: StaticImageData | File | string | imagesType
+  textButton?: typeof textButtonValue
   sectionArea?: string
   description?: string
   mainFeatures?: string[]
@@ -32,7 +32,6 @@ export type TypeListCard = {
 
 export type imagesType = {
   name: string
-  size: number
   preview: string
   file?: File
 }[]
@@ -43,10 +42,51 @@ export type saveProductType = {
 }
 
 export type DataToSendType = {
-  name: string;
-  description?: string;
-  images?: File[];
-  features?: string[];
-  benefits?: string[];
-  specifications?: string[];
+  name: string
+  description?: string
+  images?: File[]
+  features?: string[]
+  benefits?: string[]
+  specifications?: string[]
+  categoriaId: string
 }
+
+export type ProductPortugueseType = {
+  // sectionArea: string  
+  produtos: string[]
+  id: string
+  nome: string
+  urlImage: string | null
+  descricao: string
+  caracteristicas: string[]
+  beneficios: string[]
+  especificacoes: string[]
+  categoriaId: string
+  categoria?: {
+    id?: string
+    nome: string
+  }
+}
+
+/*update product*/
+export type productUpdateType = {
+  id: string
+  categoryId: string
+  name: string
+  urlImg?: string | File
+  description: string
+  features: string[]
+  benefits: string[]
+  specs: string[]
+}
+
+export type OriginalDataType = {
+  id: string
+  categoryId: string
+  name: string
+  description: string
+  features: any[]
+  benefits: any[]
+  specs: any[]
+}
+/*update product*/

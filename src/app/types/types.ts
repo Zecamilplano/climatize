@@ -51,8 +51,8 @@ export type DataToSendType = {
   categoriaId: string
 }
 
+
 export type ProductPortugueseType = {
-  // sectionArea: string  
   produtos: string[]
   id: string
   nome: string
@@ -68,6 +68,10 @@ export type ProductPortugueseType = {
   }
 }
 
+export type categoryType = {
+  nome: string
+  produtos: ProductPortugueseType[]
+}
 /*update product*/
 export type productUpdateType = {
   id: string
@@ -78,7 +82,7 @@ export type productUpdateType = {
   features: string[]
   benefits: string[]
   specs: string[]
-}
+}[]
 
 export type OriginalDataType = {
   id: string

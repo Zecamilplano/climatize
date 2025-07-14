@@ -8,6 +8,10 @@ export function RenderCardProduct() {
   const { activeCategory } = useMenu()
   const product = useCategoryProducts(activeCategory)
 
+  function slugify(text: string) {
+    return text.toLowerCase().replace(/\s+/g, "-")
+  }
+
   return (
     <>
       <MenuCategory />
@@ -17,7 +21,7 @@ export function RenderCardProduct() {
             key={product.id}
             nome={product.nome}
             urlImage={`${product.urlImage}`}
-            href={`/produtos/${product.id}`}
+            href={{ link: "/produto/" + slugify(product.nome), id: product.id }}
           />
         ))}
       </div>

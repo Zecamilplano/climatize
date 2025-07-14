@@ -10,7 +10,7 @@ export function Header() {
 
   const pathname = usePathname()
   const isHomeRoute = pathname.startsWith("/inicio")
-  const isProductsRoute = pathname.startsWith("/produtos")
+  const isProductsRoute = pathname.startsWith("/produto")
   const isLoginRoute = pathname.startsWith("/entrar")
   const isAdminRoute = pathname.startsWith("/admin/painel-admin")
   const isNewProductRoute = pathname.startsWith("/admin/novo-produto")

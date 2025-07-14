@@ -6,17 +6,15 @@ import React from "react"
 type TypeProduct = {
   nome: string
   urlImage: string | number
-  width?: number
-  height?: number
-  href: string
+  href: {
+    link: string
+    id: string
+  }
 }
-
 
 export function CardProduct({
   nome,
   urlImage,
-  width,
-  height,
   href }: TypeProduct) {
   return (
     <>
@@ -41,11 +39,14 @@ export function CardProduct({
                 alt={`produto ${nome}`}
                 width={176}
                 height={176}
-                className="w-44 flex self-center" />
+                className="w-44 py-3 flex self-center" />
 
-              <h2 className="text-xl font-medium text-card-product">{nome}</h2>
+              <h2 className="pb-2 text-xl font-medium text-card-product">{nome}</h2>
               <Link
-                href={`${href}`}
+                href={{
+                  pathname: href.link,
+                  query: { id: href.id }
+                }}
                 className="bg-button mx-3 rounded text-white text-xl py-2 hover:opacity-70 active:opacity-50 mb-3 outline-none">Comprar</Link>
             </motion.article>
           </AnimatePresence>

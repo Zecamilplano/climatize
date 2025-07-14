@@ -1,23 +1,22 @@
 import API from "@/app/database/api"
-import { useGetProducts } from "@/app/database/get-produtos"
 import { ProductPortugueseType } from "@/app/types/types"
 import Image from "next/image"
 import Link from "next/link"
 
-type paramsType = {
-  params: {
-    param: string
-  }
+export interface PageProps {
+  params: { nome: string }
+  searchParams: { id: string }
 }
-export default async function Teste({ params }: paramsType) {
-  const id = params.param
+export default async function InfoProduct({ params, searchParams }: PageProps) {
+  const id = searchParams.id
 
   const response = await fetch(`${API}/allProdutos`);
   const data = await response.json();
 
   const products = data.produtos as ProductPortugueseType[]
 
-  const product = products.find((p) => p.id === id)
+  console.log("id product", id)
+  const product = products.find((p) => p.id === "622d4d2a-d18a-4af8-81b1-83d34544d316")
   if (!product) return <h1>Produto não encontrado</h1>;
 
 

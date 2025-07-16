@@ -3,7 +3,7 @@ import { useGetProducts } from "@/app/database/get-produtos"
 import { ProductPortugueseType } from "@/app/types/types"
 import { Pencil, Plus, Search, Trash } from "lucide-react"
 import { redirect } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import ProductModal from "./product-modal"
 import deleteProduct from "@/app/database/delete-product"
 import { toast } from "react-toastify"
@@ -17,8 +17,6 @@ export default function DashboardAdmin() {
   const { getProducts, setGetProducts } = useGetProducts()
   const [isEditingProduct, setIsEditingProduct] = useState<boolean>(false)
 
-  console.log(setSelectedProduct)
-
   async function handleDelete(id: string) {
     try {
       await deleteProduct(id)
@@ -30,34 +28,17 @@ export default function DashboardAdmin() {
       }
       toast.success("Produto excluído com sucesso!")
     } catch (error) {
-      console.log("Erro ao excluir produtos:", error)
     }
   }
 
   function handleUpdateProduct(updated: ProductPortugueseType) {
-    console.log("teste", getProducts)
     setGetProducts((prev) =>
       prev.map((p) => (p.id === updated.id ? updated : p))
     )
 
     if (selectedProduct?.id === updated.id) {
       setSelectedProduct(updated)
-      console.log("teste", getProducts.map(data => data))
     }
-  }
-
-  function handleEditToggle(product: ProductPortugueseType, index: number) {
-    const isSameProduct = selectedProduct?.id === product.id
-    const isSameIndex = openModalIndex === index
-
-    if (isSameProduct && isSameIndex) {
-      setIsEditingProduct(prev => !prev)
-    } else {
-      setSelectedProduct(product)
-      setOpenModalIndex(index)
-      setIsEditingProduct(true)
-    }
-
   }
 
   const handleSelectProduct = (product: ProductPortugueseType, index: number) => {
@@ -67,7 +48,7 @@ export default function DashboardAdmin() {
     if (isSameProduct && isSameIndex) {
       setSelectedProduct(null);
       setOpenModalIndex(null);
-      setIsEditingProduct(false);
+      // setIsEditingProduct(false);
     } else {
       setSelectedProduct(product);
       setOpenModalIndex(index);
@@ -81,7 +62,7 @@ export default function DashboardAdmin() {
     <div className="bg-main min-h-screen absolute top-[101px] left-0 right-0 font-inter">
       <section className="flex justify-between flex-row mt-10 mx-6 flex-wrap gap-4">
         <div className="w-full sm:w-auto bg-white flex lg:flex-row items-center gap-1.5 px-2  border-2 border-gray-300 rounded-lg group focus-within:border-cyan-400">
-          <Search color="#9CA3AF" size={16} />
+          <Search color="#8CA3AF" size={16} />
           <input
             type="text"
             placeholder="Buscar produtos"
@@ -123,8 +104,20 @@ export default function DashboardAdmin() {
                       color="#37C7EF"
                       className="transform transition duration-200 hover:scale-105 active:scale-95 cursor-pointer"
                       onClick={(e) => {
-                        handleEditToggle(product, index)
                         e.stopPropagation()
+
+                        const isSameProduct = selectedProduct?.id === product.id
+                        const isSameIndex = openModalIndex === index
+
+                        if (isSameProduct && isSameIndex) {
+                          // Se o modal já estiver aberto para este produto, só alterna edição
+                          setIsEditingProduct(prev => !prev)
+                        } else {
+                          // Se o modal não estiver aberto, abre e ativa edição
+                          setSelectedProduct(product)
+                          setOpenModalIndex(index)
+                          setIsEditingProduct(true)
+                        }
                       }} />
                     <Trash
                       color="red"
@@ -135,18 +128,12 @@ export default function DashboardAdmin() {
                 </article>
 
                 {/* Modal mobile (abaixo do item clicado) */}
-                {openModalIndex === index && selectedProduct && (
+                {openModalIndex === index && selectedProduct && window.innerWidth < 1024 && (
                   <div className="lg:hidden mt-4">
 
                     <ProductModal
                       product={selectedProduct}
-                      isEditing={isEditingProduct}
-                      setIsEditing={setIsEditingProduct}
-                      onEditToggle={() => {
-                        if (selectedProduct && openModalIndex !== null) {
-                          handleEditToggle(selectedProduct, openModalIndex);
-                        }
-                      }}
+                      editingState={[isEditingProduct, setIsEditingProduct]}
                       onDelete={async (id: string) => {
                         try {
                           setGetProducts(prev => prev.filter(p => p.id !== id))
@@ -182,13 +169,7 @@ export default function DashboardAdmin() {
             <ProductModal
               product={selectedProduct}
               onUpdate={handleUpdateProduct}
-              isEditing={isEditingProduct}
-              setIsEditing={setIsEditingProduct}
-              onEditToggle={() => {
-                if (selectedProduct && openModalIndex !== null) {
-                  handleEditToggle(selectedProduct, openModalIndex)
-                }
-              }}
+              editingState={[isEditingProduct, setIsEditingProduct]}
               onDelete={async (id: string) => {
                 try {
                   setGetProducts(prev => prev.filter(p => p.id !== id))

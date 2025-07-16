@@ -1,6 +1,6 @@
 import { ProductPortugueseType, productUpdateType } from "@/app/types/types"
 import { Pencil, Trash } from "lucide-react"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import CardInformation from "../card-information"
 import EspecificacoesTecnicas from "../specs/index"
 import editProduct from "@/app/database/edit-product"
@@ -12,15 +12,16 @@ type ProductModalType = {
   product: ProductPortugueseType
   onUpdate?: (updated: ProductPortugueseType) => void
   isEditing?: boolean
-  setIsEditing: (value: boolean) => void
-  onEditToggle: () => void
+  editingState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
   onDelete: (id: string) => void
 }
 
-export default function ProductModal({ key, product, onEditToggle, onDelete }: ProductModalType) {
+export default function ProductModal({ key, product, editingState, onDelete }: ProductModalType) {
+  const [isEditing, setIsEditing] = editingState
+  console.log("editando", isEditing)
 
-  const [isEditing, setIsEditing] = useState(false)
-  const [editToggle, setEditToggle] = useState(onEditToggle)
+  // const [isEditing, setIsEditing] = useState<boolean>(false)
+  // const [editToggle, setEditToggle] = useState(onEditToggle)
 
   const [productId] = useState(product.id)
   const [nome, setNome] = useState(product.nome)
@@ -107,14 +108,13 @@ export default function ProductModal({ key, product, onEditToggle, onDelete }: P
   }, [product])
 
 
-  useEffect(() => {
-    console.log(especificacoes)
-    if (isEditing) {
-      setCaracteristicas(product.caracteristicas)
-      setBeneficios(product.beneficios)
-      setEspecificacoes(product.especificacoes)
-    }
-  }, [isEditing])
+  // useEffect(() => {
+  //   if (isEditing) {
+  //     setCaracteristicas(product.caracteristicas)
+  //     setBeneficios(product.beneficios)
+  //     setEspecificacoes(product.especificacoes)
+  //   }
+  // }, [onEditToggle, isEditing])
 
 
   return (
@@ -142,7 +142,7 @@ export default function ProductModal({ key, product, onEditToggle, onDelete }: P
         <div className="flex gap-3">
 
           <button
-            onClick={onEditToggle}
+            onClick={() => setIsEditing((prev) => !prev)}
             className="transform transition duration-200 scale-105 active:scale-95 cursor-pointer"
             title={isEditing ? "sair do modo de edição" : "Editar"}
           >

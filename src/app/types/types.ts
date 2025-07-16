@@ -82,7 +82,7 @@ export type productUpdateType = {
   features: string[]
   benefits: string[]
   specs: string[]
-}[]
+}
 
 export type OriginalDataType = {
   id: string

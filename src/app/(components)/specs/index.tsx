@@ -7,6 +7,7 @@ interface EspecificacoesTecnicasProps {
   onChangeAll?: (valores: string[]) => void
   error?: string
   clearError?: () => void
+  clearFields?: boolean
 }
 
 export default function EspecificacoesTecnicas({
@@ -14,7 +15,8 @@ export default function EspecificacoesTecnicas({
   dadosAnteriores = [],
   onChangeAll,
   error,
-  clearError
+  clearError,
+  clearFields,
 }: EspecificacoesTecnicasProps) {
   const labels = [
     "Consumo elétrico (KW)",
@@ -27,6 +29,9 @@ export default function EspecificacoesTecnicas({
     "capacidadeTanque"
   ]
 
+  type FormatoInput = "kilowatt" | "metroQuadrado" | "litros"
+
+  const formats: FormatoInput[] = ["kilowatt", "metroQuadrado", "litros"];
   const [valores, setValores] = useState<string[]>(["", "", ""])
 
   // Atualiza o estado interno com novos dados externos, se diferentes
@@ -45,6 +50,13 @@ export default function EspecificacoesTecnicas({
       onChangeAll(valores)
     }
   }, [valores])
+
+  useEffect(() => {
+    if (clearFields) {
+      setValores(["", "", ""])
+    }
+  }, [clearFields])
+
 
   const handleChange = (index: number, newValue: string) => {
     const updated = [...valores]
@@ -69,6 +81,7 @@ export default function EspecificacoesTecnicas({
             onChange={(v: string) => handleChange(index, v)}
             placeholder={`Digite ${label.toLowerCase()}`}
             isEditing={isEditing}
+            format={formats[index]}
           />
         ))}
         {error && <p className="text-red-500 text-sm pb-2">{error}</p>}

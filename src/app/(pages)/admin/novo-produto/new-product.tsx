@@ -301,7 +301,6 @@ export default function NewProduct() {
             onChangeAll={handleSpecChange}
             error={errorSpecifications}
             clearError={() => setErrorSpecifications}
-            dadosAnteriores={specificationList}
           />
           {/* {errorSpecifications && <p className="text-red-500">{errorSpecifications}</p>} */}
 

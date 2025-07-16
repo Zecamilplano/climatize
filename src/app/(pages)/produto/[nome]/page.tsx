@@ -4,10 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 
 export interface PageProps {
-  params: { nome: string }
-  searchParams: { id: string }
+  params: Promise<{ nome: string }>
+  searchParams: Promise<{ id: string }>
 }
-export default async function InfoProduct({ params, searchParams }: PageProps) {
+export default async function InfoProduct(props: PageProps) {
+  const searchParams = await props.searchParams;
+
   const id = searchParams.id
 
   const response = await fetch(`${API}/allProdutos`);

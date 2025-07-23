@@ -1,73 +1,72 @@
-"use client"
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
-export function useHeader() {
+type Link = {
+  href: string
+  label: string
+}
 
-  /* Scroll link */
-  const pathname = usePathname();
+export function useHeaderScroll(pathname: string, links: Link[]) {
+  const [activeSection, setActiveSection] = useState(pathname)
 
-  const links = [
-    { name: "Início", href: "#inicio" },
-    { name: "Produtos", href: "#produtos" },
-    { name: "Sobre", href: "/sobre" },
-  ];
+  const router = useRouter()
+  const scrollToSection = (href: string) => {
 
+    if (href.startsWith("#")) {
+      const path = window.location.pathname
+      if (path !== "/") {
+        router.push(`/${href}`)
+      } else {
+        const id = href.replace("#", "");
+        const elemento = document.getElementById(id);
+        if (elemento) {
+          const offset = 150;
+          const top = elemento.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }
 
-  const scrollToSection = (id: string) => {
-    const section = document.querySelector(id);
-    if (!section) {
-      console.error(`❌ Seção ${id} não encontrada!`);
-      return;
+    } else {
+      router.push("/sobre")
     }
-
-    const header = document.querySelector("header");
-    const headerHeight = header ? header.offsetHeight : 0;
-
-    const sectionPosition = section.getBoundingClientRect().top + window.scrollY; // Posição real na página
-    const offsetPosition = sectionPosition - headerHeight - 10; // Ajuste com header
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  };
-
-  /* Scroll link */
-
-  /* activeSection */
-  const [activeSection, setActiveSection] = useState(links[0]?.href || "/")
+  }
 
   useEffect(() => {
     const updateActiveSection = () => {
-      const header = document.querySelector("header");
-      const headerHeight = header ? header.offsetHeight : 0;
+      const header = document.querySelector("header")
+      const headerHeight = header ? header.offsetHeight : 0
 
-      let currentSection = pathname; // Começa com a página atual como ativa
+      let current = pathname
 
-      // Se estiver na home, verificamos as âncoras ao invés do pathname
       if (pathname === "/") {
-        links.forEach(link => {
-          if (!link.href.startsWith("#")) return; // Ignora links externos
+        const scrollPosition = window.scrollY + window.innerHeight / 2
 
-          const section = document.querySelector(link.href);
-          if (!section) return;
+        links.forEach((link) => {
+          if (!link.href.startsWith("#")) return
 
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= headerHeight + 10 && rect.bottom >= headerHeight + 10) {
-            currentSection = link.href;
+          const section = document.querySelector(link.href)
+          if (!section || !(section instanceof HTMLElement)) return
+
+          const sectionTop = section.offsetTop - headerHeight
+          const sectionBottom = sectionTop + section.offsetHeight
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            current = link.href
           }
-        });
+        })
       }
 
-      setActiveSection(currentSection);
-    };
+      setActiveSection(current)
+    }
 
-    window.addEventListener("scroll", updateActiveSection);
-    updateActiveSection(); // Garante que o estado inicial esteja correto
+    window.addEventListener("scroll", updateActiveSection)
+    updateActiveSection()
 
-    return () => window.removeEventListener("scroll", updateActiveSection);
-  }, [pathname, links]); // Atualiza quando mudar de página
-  /* activeSection */
-  return { links, pathname, scrollToSection, activeSection }
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection)
+    }
+  }, [pathname, links])
+
+  return { activeSection, scrollToSection }
 }
+

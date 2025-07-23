@@ -1,3 +1,4 @@
+import { Header } from "@/app/(components)/(header)/header";
 import { RenderCardProduct } from "./render-card-product";
 
 export default function RenderProducts() {

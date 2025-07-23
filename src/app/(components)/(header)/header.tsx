@@ -1,28 +1,10 @@
-"use client"
-import { usePathname } from "next/navigation"
-import { MainHeader } from "./main-header"
-import { ProductHeader } from "./product-header"
-import { LoginHeader } from "./login-header"
-import { NewProductHeader } from "./new-product-header"
-import { AdminHeader } from "./admin-header"
+import ContainerHeader from "./container";
+import ContentComponent from "./content";
+import LogoComponent from "./logo";
 
-export function Header() {
-
-  const pathname = usePathname()
-  const isHomeRoute = pathname.startsWith("/inicio")
-  const isProductsRoute = pathname.startsWith("/produto")
-  const isLoginRoute = pathname.startsWith("/entrar")
-  const isAdminRoute = pathname.startsWith("/admin/painel-admin")
-  const isNewProductRoute = pathname.startsWith("/admin/novo-produto")
-
-  if (isHomeRoute) return <MainHeader />
-  if (isProductsRoute) return <ProductHeader />
-  if (isLoginRoute) return <LoginHeader />
-  if (isAdminRoute) return <AdminHeader />
-  if (isNewProductRoute) return <NewProductHeader />
-
-  return (
-    <MainHeader />
-  )
+export const Header = {
+  container: ContainerHeader,
+  image: LogoComponent,
+  content: ContentComponent,
 }
 

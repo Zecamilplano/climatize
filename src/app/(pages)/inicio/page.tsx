@@ -1,9 +1,9 @@
 "use client"
-import { useHeader } from "@/app/hooks/hook-header-scroll";
+import { useHeaderScroll } from "@/app/hooks/hook-header-scroll";
 import { House, Settings, ShoppingCart } from "lucide-react";
 
 export default function HomeComponent() {
-  const { links, scrollToSection } = useHeader()
+  const { links, scrollToSection } = useHeaderScroll()
 
   return (
     <section id="inicio" className="bg-main flex gap-6 md:gap-7 flex-wrap justify-center items-center md:h-[100dvh] py-5">

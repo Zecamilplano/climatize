@@ -1,9 +1,10 @@
 import { Montserrat, Inter, Noto_Sans_TC } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "./(components)/(header)/header";
 import { MenuProvider } from "./contexts/menu-context";
 import { ToastContainer } from 'react-toastify';
+import { Header } from "./(components)/(header)/header";
+import { HeaderInfoProduct } from "./(components)/(header)/header-info-product";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600"],
@@ -25,13 +26,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+
   return (
     <html lang="pt-br">
       <body
         className={`${montserrat} ${inter} antialiased`}
       >
         <MenuProvider>
-          <Header />
+
+          <Header.container fixed={true}>
+            <Header.image />
+            <Header.content contentType="home" />
+          </Header.container>
+
+          <HeaderInfoProduct />
+
           <main className="bg-main flex-grow">{children}</main>
           <ToastContainer />
         </MenuProvider>

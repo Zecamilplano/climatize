@@ -3,6 +3,7 @@ import { useMenu } from "@/app/contexts/menu-context"
 import { MenuCategory } from "./menu-category"
 import { CardProduct } from "@/app/(components)/card-product"
 import { useCategoryProducts } from "@/app/hooks/use-category-products"
+import { Header } from "@/app/(components)/(header)/header"
 
 export function RenderCardProduct() {
   const { activeCategory } = useMenu()
@@ -14,6 +15,11 @@ export function RenderCardProduct() {
 
   return (
     <>
+      {/* <Header.container> */}
+      {/*   <Header.image /> */}
+      {/*   <Header.content contentType="product" /> */}
+      {/* </Header.container> */}
+
       <MenuCategory />
       <div className="flex flex-wrap justify-center gap-8 bg-main">
         {product?.map(product => (

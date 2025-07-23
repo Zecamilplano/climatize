@@ -130,8 +130,8 @@ export default function NewProduct() {
     if (!isValid) return
 
     const categoryMap: Record<string, string> = {
-      Residencial: "3341f0c4-585c-48e9-bab6-72ee5a23f9d6",
-      Comercial: "3c134c8e-aef2-4f20-995f-8942afe4391f"
+      Residencial: "7e2636ea-c226-438b-9287-7d5f6776784c",
+      Comercial: "cf279eaa-9ff6-485e-932d-16406b6625c2"
     }
 
     const categoryId = categoryMap[selectedOption]

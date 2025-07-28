@@ -8,7 +8,7 @@ export function MenuCategory() {
   return (
     <div
       id="category-menu"
-      className="w-[90%] bg-menu flex justify-self-center gap-9 font-sans sticky top-0 left-0 md:sticky md:top-[104px] md:left-0 z-10 rounded-md"
+      className="w-[90%]  bg-menu flex justify-self-center gap-9 font-sans sticky top-36 left-0 right-0 z-50 rounded-md"
     >
       {["residencial", "comercial"].map(category => (
         <section

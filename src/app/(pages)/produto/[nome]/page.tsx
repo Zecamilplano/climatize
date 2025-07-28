@@ -1,3 +1,4 @@
+import { Header } from "@/app/(components)/(header)/header"
 import API from "@/app/database/api"
 import { ProductPortugueseType } from "@/app/types/types"
 import Image from "next/image"
@@ -17,8 +18,8 @@ export default async function InfoProduct(props: PageProps) {
 
   const products = data.produtos as ProductPortugueseType[]
 
-  console.log("id product", id)
-  const product = products.find((p) => p.id === "622d4d2a-d18a-4af8-81b1-83d34544d316")
+  // console.log("id product", id)
+  const product = products.find((p) => p.id === id)
   if (!product) return <h1>Produto não encontrado</h1>;
 
   const labels = [
@@ -28,8 +29,13 @@ export default async function InfoProduct(props: PageProps) {
   ]
 
   return (
-    <section className=" bg-main border-[20px] border-main flex flex-col items-center  rounded-md">
-      <div className="bg-white flex flex-col md:w-4/5 md:flex-row desktop-1366:flex-row desktop-1366:h-auto desktop-1366:w-4/5 desktop-1559:flex-row items-center text-left rounded-md">
+    <section className=" bg-main  border-main flex flex-col items-center  rounded-md">
+      <Header.container>
+        <Header.image />
+        <Header.content contentType="product" />
+      </Header.container>
+
+      <div className="mt-10 bg-white flex flex-col md:w-4/5 md:flex-row desktop-1366:flex-row desktop-1366:h-auto desktop-1366:w-4/5 desktop-1559:flex-row items-center text-left rounded-md">
 
         <div className="w-full md:w-1/2 flex justify-center self-center p-4 ">
           <div className="relative w-full h-64 md:h-80 lg:h-96">
@@ -59,7 +65,7 @@ export default async function InfoProduct(props: PageProps) {
 
       </div>
 
-      <div className="bg-white w-full md:w-4/5 py-8 px-4">
+      <div className="bg-white w-full md:w-4/5 py-8 px-4 mb-10 rounded-md">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-montserrat">
 
           {/* Características Principais */}
@@ -75,7 +81,7 @@ export default async function InfoProduct(props: PageProps) {
           {/* Benefícios */}
           <div className="bg-zinc-100 rounded-xl p-5 shadow-md">
             <h3 className="text-2xl font-semibold mb-4 text-title-produto-info">Benefícios</h3>
-            <ul className="ml-4 list-disc space-y-2">
+            <ul className="ml-4 list-disc space-y-2 pt-3">
               {product?.beneficios?.map((benefit, index) => (
                 <li key={index} className="text-sub-text-produto-info text-lg">{benefit}</li>
               ))}

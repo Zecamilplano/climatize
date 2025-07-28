@@ -1,9 +1,8 @@
 "use client"
-
-import authenticate from "@/app/database/authenticate";
 import { Eye, EyeOff } from "lucide-react";
 import { redirect } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 
 export default function Login() {
@@ -26,11 +25,21 @@ export default function Login() {
     })
 
     if (res.ok) {
+      sessionStorage.setItem("LoggedIn", "true")
       redirect("/admin/painel-admin")
     } else {
       console.log("Usuário ou senha inválidos")
     }
   }
+
+  useEffect(() => {
+    const logoutFlag = sessionStorage.getItem("logout")
+
+    if (logoutFlag) {
+      toast.success("Você saiu da conta.")
+      sessionStorage.removeItem("logout")
+    }
+  }, [])
 
 
   return (

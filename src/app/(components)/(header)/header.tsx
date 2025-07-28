@@ -1,6 +1,6 @@
-import ContainerHeader from "./container";
-import ContentComponent from "./content";
-import LogoComponent from "./logo";
+import ContainerHeader from "./components/container";
+import ContentComponent from "./components/content";
+import LogoComponent from "./components/logo";
 
 export const Header = {
   container: ContainerHeader,

@@ -5,6 +5,8 @@ import { MenuProvider } from "./contexts/menu-context";
 import { ToastContainer } from 'react-toastify';
 import { Header } from "./(components)/(header)/header";
 import { HeaderInfoProduct } from "./(components)/(header)/header-info-product";
+import { HeaderHome } from "./(components)/(header)/header-home";
+import { HeaderAdmin } from "./(components)/(header)/header-admin";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "600"],
@@ -34,12 +36,9 @@ export default function RootLayout({
       >
         <MenuProvider>
 
-          <Header.container fixed={true}>
-            <Header.image />
-            <Header.content contentType="home" />
-          </Header.container>
-
+          <HeaderHome />
           <HeaderInfoProduct />
+          <HeaderAdmin />
 
           <main className="bg-main flex-grow">{children}</main>
           <ToastContainer />

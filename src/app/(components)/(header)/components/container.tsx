@@ -9,10 +9,10 @@ export default function ContainerHeader({ children, fixed = false }: ContainerTy
   return (
     <div
       className={`
-        bg-white w-full px-3 py-3 flex justify-between 
+         w-full 
         ${fixed ? "fixed top-0 left-0 right-0 z-50" : ""}
     `}>
-      {children}
+      <div className="relative flex flex-row justify-between">{children}</div>
     </div>
   )
 }

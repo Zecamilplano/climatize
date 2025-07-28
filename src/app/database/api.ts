@@ -1,2 +1,2 @@
-const API = "http://localhost:3000"
+const API = "https://api-site-loja.fly.dev"
 export default API

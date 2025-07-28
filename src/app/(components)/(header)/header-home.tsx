@@ -2,13 +2,14 @@
 import { usePathname } from "next/navigation";
 import { Header } from "./header";
 
-export function HeaderInfoProduct() {
+export function HeaderHome() {
   const pathname = usePathname()
+
   return (
-    pathname === "/produto/[nome]" && (
-      <Header.container>
+    (pathname === "/" || pathname === "/sobre") && (
+      <Header.container fixed={pathname === "/" ? true : false}>
         <Header.image />
-        <Header.content contentType="product" />
+        <Header.content contentType="home" />
       </Header.container>
     )
 

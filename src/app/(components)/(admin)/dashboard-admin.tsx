@@ -3,7 +3,7 @@ import { useGetProducts } from "@/app/database/get-produtos"
 import { ProductPortugueseType } from "@/app/types/types"
 import { Pencil, Plus, Search, Trash } from "lucide-react"
 import { redirect } from "next/navigation"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import ProductModal from "./product-modal"
 import deleteProduct from "@/app/database/delete-product"
 import { toast } from "react-toastify"
@@ -56,11 +56,22 @@ export default function DashboardAdmin() {
     }
   }
 
+  useEffect(() => {
+    const loggedInFlag = sessionStorage.getItem("LoggedIn")
 
+    if (loggedInFlag) {
+      toast.success("Login realizado com sucesso!", {
+        onClose: () => {
+          sessionStorage.removeItem("LoggedIn");
+        },
+      });
+    }
+
+  }, [])
 
   return (
-    <div className="bg-main min-h-screen absolute top-[101px] left-0 right-0 font-inter">
-      <section className="flex justify-between flex-row mt-10 mx-6 flex-wrap gap-4">
+    <div className="bg-main min-h-screen  font-inter pt-6">
+      <section className="flex justify-between flex-row mx-6 flex-wrap gap-4">
         <div className="w-full sm:w-auto bg-white flex lg:flex-row items-center gap-1.5 px-2  border-2 border-gray-300 rounded-lg group focus-within:border-cyan-400">
           <Search color="#8CA3AF" size={16} />
           <input

@@ -13,11 +13,24 @@ export function useHeaderScroll(pathname: string, links: Link[]) {
   const scrollToSection = (href: string) => {
 
     if (href.startsWith("#")) {
-      const path = window.location.pathname
+      const id = href.replace("#", "");
+      const path = window.location.pathname;
+
       if (path !== "/") {
-        router.push(`/${href}`)
+        // Redireciona para a página inicial com o hash
+        router.push(`/${href}`);
+
+        // Espera um pouco para o DOM estar pronto e então aplica o scroll com offset
+        setTimeout(() => {
+          const elemento = document.getElementById(id);
+          if (elemento) {
+            const offset = 150;
+            const top = elemento.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: "smooth" });
+          }
+        }, 300); // tempo ajustável, pode aumentar se necessário
       } else {
-        const id = href.replace("#", "");
+        // Se já está na página correta, faz o scroll diretamente
         const elemento = document.getElementById(id);
         if (elemento) {
           const offset = 150;
@@ -25,9 +38,9 @@ export function useHeaderScroll(pathname: string, links: Link[]) {
           window.scrollTo({ top, behavior: "smooth" });
         }
       }
-
     } else {
-      router.push("/sobre")
+      // Rota normal
+      router.push(href);
     }
   }
 

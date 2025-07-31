@@ -17,6 +17,7 @@ export default function NewProduct() {
   const [caracteristicas, setCaracteristicas] = useState<string[]>([])
   const [beneficios, setBeneficios] = useState<string[]>([])
   const [specificationList, setSpecificationList] = useState<string[]>(["", "", ""])
+  const [clearSpecs, setClearSpecs] = useState<boolean>(false)
 
   const [selectedOption, setSelectedOption] = useState<string>("")
 
@@ -42,12 +43,8 @@ export default function NewProduct() {
 
   function handleChangeOption(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
-
     setErrorCategoria("")
-
     setSelectedOption(value)
-
-    // console.log("opção selecionada:", event.target.value)
   }
 
   function handleValideteField() {
@@ -68,8 +65,6 @@ export default function NewProduct() {
       specificationList: specsPreenchidas,
       selectedOption: selectedOption.trim()
     }
-
-    // console.log("DEBUG campos:", campos)
 
     const nenhumPreenchido =
       (!campos.nome || campos.nome === "") &&
@@ -99,7 +94,7 @@ export default function NewProduct() {
       setErrorDescricao("A descrição é obrigatória.")
       isValid = false
     }
-    if (specificationList.every((val) => val.trim() === "")) {
+    if (specificationList.length === 0) {
       setErrorCaracteristicas("Adicione todas as característica.")
       isValid = false
     }
@@ -146,7 +141,7 @@ export default function NewProduct() {
       categoriaId: categoryId
     };
 
-    console.log("Dados para envio!", dadosParaEnvio)
+    // console.log("Dados para envio!", dadosParaEnvio)
     try {
       const success = await toast.promise(
         saveProduct(dadosParaEnvio),
@@ -159,21 +154,19 @@ export default function NewProduct() {
 
       if (success) {
         // ✅ Limpar todos os estados se envio foi bem-sucedido
-        setImages([]);
-        setCaracteristicas([]);
-        setBeneficios([]);
-        setSpecificationList(["", "", ""]);
-        setSelectedOption("");
-        updateProduct("nome", "");
-        updateProduct("descricao", "");
+        setImages([])
+        setCaracteristicas([])
+        setBeneficios([])
+        setSpecificationList(["", "", ""])
+        setClearSpecs(true)
+        setSelectedOption("")
+        updateProduct("nome", "")
+        updateProduct("descricao", "")
       }
     } catch (error) {
       console.error("Erro inesperado ao enviar o produto:", error)
     }
 
-    // toast.success("Enviado com secesso!")
-    // saveProduct(dadosParaEnvio)
-    // console.log("dado de envio", dadosParaEnvio)
     setImages([]);
   }
 
@@ -301,8 +294,8 @@ export default function NewProduct() {
             onChangeAll={handleSpecChange}
             error={errorSpecifications}
             clearError={() => setErrorSpecifications}
+            clearFields={clearSpecs}
           />
-          {/* {errorSpecifications && <p className="text-red-500">{errorSpecifications}</p>} */}
 
         </div>
 

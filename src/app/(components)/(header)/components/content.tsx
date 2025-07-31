@@ -4,7 +4,7 @@ import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 type ContentType = "home" | "admin" | "product"
 
@@ -52,15 +52,15 @@ export default function ContentComponent({ contentType }: Props) {
   return (
     <nav className="flex gap-4" key={2}>
       {links.map((link, index) =>
-        <>
+        <Fragment key={index}>
           {contentType === "home" && (
             <button
               key={index}
-              onClick={() => scrollToSection(link.href || "")}
+              onClick={() => scrollToSection(link.href)}
               className={`${activeSection === link.href
                 ? "text-link-clicked underline"
                 : "text-link-normal"
-                }  transition-all pb-1 outline-none text-2xl `}
+                } hidden lg:block  transition-all pb-1 outline-none text-2xl `}
             >
               {link.label}
             </button>
@@ -77,12 +77,11 @@ export default function ContentComponent({ contentType }: Props) {
           )}
 
 
-        </>
+        </Fragment>
       )}
 
       {contentType === "admin" && (
         <div className="flex items-center gap-2 pr-3">
-
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <Image
               src="/img-eze.jpeg"

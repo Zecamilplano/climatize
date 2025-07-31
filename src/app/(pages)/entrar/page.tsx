@@ -25,7 +25,7 @@ export default function Login() {
     })
 
     if (res.ok) {
-      sessionStorage.setItem("LoggedIn", "true")
+      toast.success("Login realizado com sucesso!")
       redirect("/admin/painel-admin")
     } else {
       console.log("Usuário ou senha inválidos")

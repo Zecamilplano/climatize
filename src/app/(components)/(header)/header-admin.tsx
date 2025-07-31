@@ -10,6 +10,7 @@ export function HeaderAdmin() {
     headerUrlVisible && (
       <Header.container >
         <Header.image />
+        <Header.centerContent />
         <Header.content contentType="admin" />
       </Header.container>
     )

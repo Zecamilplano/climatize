@@ -5,7 +5,6 @@ import API from "@/app/database/api"
 export async function POST(request: Request) {
   const { user, password } = await request.json()
   const useCookie = await cookies()
-  console.log(user, password)
 
   const res = await fetch(`${API}/sessions`, {
     method: "POST",

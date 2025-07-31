@@ -56,19 +56,6 @@ export default function DashboardAdmin() {
     }
   }
 
-  useEffect(() => {
-    const loggedInFlag = sessionStorage.getItem("LoggedIn")
-
-    if (loggedInFlag) {
-      toast.success("Login realizado com sucesso!", {
-        onClose: () => {
-          sessionStorage.removeItem("LoggedIn");
-        },
-      });
-    }
-
-  }, [])
-
   return (
     <div className="bg-main min-h-screen  font-inter pt-6">
       <section className="flex justify-between flex-row mx-6 flex-wrap gap-4">

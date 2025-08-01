@@ -1,6 +1,7 @@
 import { Header } from "@/app/(components)/(header)/header"
 import API from "@/app/database/api"
 import { ProductPortugueseType } from "@/app/types/types"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -8,6 +9,12 @@ export interface PageProps {
   params: Promise<{ nome: string }>
   searchParams: Promise<{ id: string }>
 }
+
+export const metadata: Metadata = {
+  title: "Produto",
+  description: "Detalhes de produtos, como imagens de qualidades, descrições objetivas e especificacões técnicas"
+}
+
 export default async function InfoProduct(props: PageProps) {
   const searchParams = await props.searchParams;
 

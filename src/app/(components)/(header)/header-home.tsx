@@ -6,12 +6,11 @@ export function HeaderHome() {
   const pathname = usePathname()
 
   return (
-    (pathname === "/" || pathname === "/sobre") && (
-      <Header.container fixed={pathname === "/" ? true : false}>
+    pathname === "/" && (
+      <Header.container fixed={true}>
         <Header.image />
         <Header.content contentType="home" />
       </Header.container>
     )
-
   )
 }

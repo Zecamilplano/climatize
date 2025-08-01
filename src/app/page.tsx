@@ -1,5 +1,5 @@
 import "./globals.css"
-import HomeComponent from "./(pages)/inicio/page";
+import HomeComponent from "./(home-layout)/page";
 import RenderProducts from "./(pages)/produto/page";
 
 export default function Home() {

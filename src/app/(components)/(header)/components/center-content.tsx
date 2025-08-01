@@ -1,6 +1,6 @@
+"use client"
 import { useHeaderScroll } from "@/app/hooks/hook-header-scroll"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 type ContentType = "admin"
 

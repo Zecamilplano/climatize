@@ -1,9 +1,14 @@
 import Link from "next/link"
 import { Phone, Mail, MapPin, Clock, Award, Users, ThumbsUp } from "lucide-react"
+import { Header } from "@/app/(components)/(header)/header"
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-main absolute top-36 left-0">
+    <div className="min-h-screen bg-main ">
+      <Header.container fixed={false}>
+        <Header.image />
+        <Header.content contentType="about" />
+      </Header.container>
       <main className="container mx-auto py-12 px-4">
         {/* Hero Section */}
         <section className="bg-hero-section rounded-lg p-8 mb-12 text-white shadow-lg">

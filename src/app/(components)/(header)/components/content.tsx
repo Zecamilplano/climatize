@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 
-type ContentType = "home" | "admin" | "product"
+type ContentType = "home" | "about" | "admin" | "product"
 
 interface Props {
   contentType: ContentType
@@ -23,13 +23,18 @@ const linkByType: Record<ContentType, NavigationLinkType[]> = {
     { label: "Produto", href: "#produtos" },
     { label: "Sobre", href: "/sobre" },
   ],
+  about: [
+    { label: "Início", href: "#inicio" },
+    { label: "Produto", href: "#produtos" },
+    { label: "Sobre", href: "/sobre" },
+  ],
   admin: [
     { label: "Painel admin", href: "/" },
     { label: "Adicionar produtos", href: "/" },
     { label: "Produtos", href: "/" },
   ],
   product: [
-    { label: "Voltar para o início", href: "/" },
+    { label: "Lista de produtos", href: "#produtos" },
   ],
 }
 
@@ -66,14 +71,27 @@ export default function ContentComponent({ contentType }: Props) {
             </button>
           )}
 
-          {contentType === "product" && (
-            <Link
-              href="/"
+          {contentType === "about" && (
+            <button
               key={index}
+              onClick={() => scrollToSection(link.href)}
+              className={`${activeSection === link.href
+                ? "text-link-clicked underline"
+                : "text-link-normal"
+                } hidden lg:block  transition-all pb-1 outline-none text-2xl `}
+            >
+              {link.label}
+            </button>
+          )}
+
+          {contentType === "product" && (
+            <button
+              key={index}
+              onClick={() => scrollToSection(link.href)}
               className="h-auto flex items-center text-link-normal hover:opacity-80 active:opacity-50 text-2xl"
             >
               {link.label}
-            </Link>
+            </button>
           )}
 
 
